@@ -1,0 +1,24 @@
+server:
+  port: 7070
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/big_event
+    username: root
+    password: root
+
+#开启日志输出样式
+logging:
+  level:
+    com:
+      bigevent:
+        mapper: debug
+        service: info
+        controller: info
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bigevent.pojo
+#  驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
