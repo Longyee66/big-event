@@ -2,10 +2,12 @@ package com.bigevent.pojo;
 
 
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 @Data
+@Builder
 public class User {
     private Integer id;//主键ID
     private String username;//用户名
