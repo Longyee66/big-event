@@ -59,7 +59,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         log.info("开始拦截.....");
-        registry.addInterceptor(jwtTokenInterceptor).addPathPatterns("/**")
+        registry.addInterceptor(jwtTokenInterceptor).addPathPatterns("/user")
                 .excludePathPatterns("/user/login","user/register");
     }
 }

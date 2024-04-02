@@ -56,4 +56,15 @@ public class UserServiceImpl implements UserService {
         map.put("password",passwordMD5);
         return userMapper.getByUser(map);
     }
+
+    /**
+     * 查询用户信息
+     * @return
+     */
+    @Override
+    public User getUserInfo(String username) {
+        Map map=new HashMap<>();
+        map.put("username",username);
+        return userMapper.getByUser(map);
+    }
 }

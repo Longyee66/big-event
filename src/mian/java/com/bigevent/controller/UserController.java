@@ -10,10 +10,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Pattern;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class UserController {
         return Result.success();
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     @ApiOperation("登录")
     public Result login(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password) {
         User user = userService.login(username, password);
@@ -52,8 +51,17 @@ public class UserController {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", user.getUsername());
         String token = JwtUtil.createJWT(jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl(), claims);
-
-        log.info("生成token");
         return Result.success(token);
+    }
+    @GetMapping("/userInfo")
+    @ApiOperation("获取用户详细信息")
+    public Result<User> userInfo(@RequestHeader("token")String token){
+        log.info("请求头中的token:{}",token);
+        //解析token，获取当前用户的用户名
+        Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
+        String username  = (String) claims.get("username");
+
+        User user = userService.getUserInfo(username);
+        return Result.success(user);
     }
 }

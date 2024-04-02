@@ -14,10 +14,19 @@ public interface UserService {
      */
     void addUser(String username, String password);
 
-
-//    查询用户
+    /**
+     * 查询用户
+     * @param map
+     * @return
+     */
     User getByUser(Map map);
 
     //根据用户名和密码查询
     User login(String username, String password);
+
+    /**
+     * 查询用户信息
+     * @return
+     */
+    User getUserInfo(String username);
 }

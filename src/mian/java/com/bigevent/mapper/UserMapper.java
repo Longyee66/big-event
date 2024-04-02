@@ -4,6 +4,7 @@ import com.bigevent.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
