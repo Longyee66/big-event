@@ -4,13 +4,15 @@ import com.bigevent.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.Map;
+
 @Mapper
 public interface UserMapper {
     //查询用户
-    @Select("select * from user where username=#{username}")
-    User getByUserName(String username);
-
+    User getByUser(Map map);
     @Insert("insert into user(username, password, create_time, update_time) values " +
             "(#{username},#{password},#{createTime},#{updateTime})")
-    void insert(User user1);
+    void insert(User user);
+
 }

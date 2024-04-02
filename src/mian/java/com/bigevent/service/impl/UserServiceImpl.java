@@ -8,21 +8,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
     /**
-     * 根据usernam查询数据
-     * @param username
+     * 查询用户
+     * @param map
      * @return
      */
     @Override
-    public User getByUserName(String username) {
-        return userMapper.getByUserName(username);
+    public User getByUser(Map map) {
+        return userMapper.getByUser(map);
     }
-
     /**
      * 注册用户
      * @param username
@@ -38,5 +40,20 @@ public class UserServiceImpl implements UserService {
                 .updateTime(LocalDateTime.now())
                 .build();
         userMapper.insert(user1);
+    }
+
+    /**
+     * 用户登录接口
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public User login(String username, String password) {
+        String passwordMD5=DigestUtils.md5DigestAsHex(password.getBytes());
+        Map map=new HashMap<>();
+        map.put("username",username);
+        map.put("password",passwordMD5);
+        return userMapper.getByUser(map);
     }
 }

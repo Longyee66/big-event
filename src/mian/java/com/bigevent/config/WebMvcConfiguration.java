@@ -1,8 +1,11 @@
 package com.bigevent.config;
 
+import com.bigevent.interceptor.JwtTokenInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +20,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
+    @Autowired
+    private JwtTokenInterceptor jwtTokenInterceptor;
+
+
     /**
      * 通过kniffe4j生成接口文档
      */
@@ -45,6 +52,15 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         super.addResourceHandlers(registry);
+    }
+
+    //登录拦截
+
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+        log.info("开始拦截.....");
+        registry.addInterceptor(jwtTokenInterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/user/login","user/register");
     }
 }
 

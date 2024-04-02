@@ -3,16 +3,21 @@ package com.bigevent.service;
 import com.bigevent.pojo.User;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 public interface UserService {
-    /**
-     * 根据用户名查询用户
-     * @return
-     */
-    User getByUserName(String username);
+
     /**
      * 注册用户
      * @param username
      * @param password
      */
     void addUser(String username, String password);
+
+
+//    查询用户
+    User getByUser(Map map);
+
+    //根据用户名和密码查询
+    User login(String username, String password);
 }

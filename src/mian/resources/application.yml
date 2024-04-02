@@ -19,6 +19,16 @@ logging:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.bigevent.pojo
-#  驼峰命名
+  #  驼峰命名
   configuration:
     map-underscore-to-camel-case: true
+
+#jwt配置
+bigevent:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: long
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
