@@ -1,7 +1,6 @@
 package com.bigevent.service;
 
 import com.bigevent.pojo.User;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -29,4 +28,9 @@ public interface UserService {
      * @return
      */
     User getUserInfo(String username);
+
+    /**
+     * 跟新用户信息
+     */
+    void update(User user);
 }

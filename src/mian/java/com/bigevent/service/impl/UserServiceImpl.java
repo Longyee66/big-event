@@ -65,6 +65,14 @@ public class UserServiceImpl implements UserService {
     public User getUserInfo(String username) {
         Map map=new HashMap<>();
         map.put("username",username);
+        /*User user=userMapper.getByUser(map);
+        user.setPassword("******");*/
         return userMapper.getByUser(map);
+    }
+
+    @Override
+    public void update(User user) {
+        user.setUpdateTime(LocalDateTime.now());
+        userMapper.update(user);
     }
 }

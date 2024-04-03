@@ -66,4 +66,10 @@ public class UserController {
         User user = userService.getUserInfo(username);
         return Result.success(user);
     }
+    @PutMapping("/update")
+    @ApiOperation("更新用户基本信息")
+    public Result update(@RequestBody @Validated User user){
+        userService.update(user);
+        return Result.success();
+    }
 }
