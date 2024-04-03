@@ -2,8 +2,8 @@ package com.bigevent.interceptor;
 
 
 import com.bigevent.pojo.JwtProperties;
-import com.bigevent.pojo.Result;
 import com.bigevent.utils.JwtUtil;
+import com.bigevent.utils.ThreadLocalUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,12 +35,17 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
             log.info("jwt校验：{}",token);
             Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             String username = (String) claims.get("username");
-            log.info("当前登录员工姓名：{}",username);
+            ThreadLocalUtils.setCurrentUserName(username);
+            log.info("当前登录用户：{}",username);
             return true;
         } catch (Exception e) {
             response.setStatus(401);
             return false;
         }
+    }
 
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        ThreadLocalUtils.remove();
     }
 }
