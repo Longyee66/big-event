@@ -33,4 +33,10 @@ public interface UserService {
      * 跟新用户信息
      */
     void update(User user);
+
+    /**
+     *
+     * @param avatarUrl
+     */
+    void updateAvarter(String avatarUrl);
 }

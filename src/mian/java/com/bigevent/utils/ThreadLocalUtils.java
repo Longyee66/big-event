@@ -2,7 +2,7 @@ package com.bigevent.utils;
 
 public class ThreadLocalUtils {
 
-    private static  ThreadLocal<String> threadLocal=new ThreadLocal();
+    private static final ThreadLocal<String> threadLocal=new ThreadLocal();
     public static void setCurrentUserName(String value) {
         threadLocal.set(value);
     }

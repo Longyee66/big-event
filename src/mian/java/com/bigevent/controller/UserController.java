@@ -9,6 +9,7 @@ import com.bigevent.utils.ThreadLocalUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -72,4 +73,11 @@ public class UserController {
         userService.update(user);
         return Result.success();
     }
+    @PatchMapping("/updateAvatar")
+    @ApiOperation("更新用户头像")
+    public Result updateAvatar(@RequestParam @URL String avatarUrl){
+        userService.updateAvarter(avatarUrl);
+        return Result.success();
+    }
+
 }
