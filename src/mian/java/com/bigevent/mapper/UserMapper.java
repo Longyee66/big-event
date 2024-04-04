@@ -1,6 +1,7 @@
 package com.bigevent.mapper;
 
 import com.bigevent.pojo.User;
+import com.bigevent.pojo.dto.Password;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
@@ -25,4 +26,6 @@ public interface UserMapper {
 
     @Update("update user set user_pic=#{avatarUrl},update_time=now() where id=#{id}")
     void updateAvarter(String avatarUrl, Integer id);
+    @Update("update user set password=#{password},update_time=now() where id=#{id}")
+    void updatePwd(String password, Integer id);
 }

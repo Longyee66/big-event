@@ -1,6 +1,8 @@
 package com.bigevent.service;
 
+import com.bigevent.pojo.Result;
 import com.bigevent.pojo.User;
+import com.bigevent.pojo.dto.Password;
 
 import java.util.Map;
 
@@ -39,4 +41,10 @@ public interface UserService {
      * @param avatarUrl
      */
     void updateAvarter(String avatarUrl);
+
+    /**
+     * 更新用户密码
+     * @param password
+     */
+    void updatePwd(String password);
 }

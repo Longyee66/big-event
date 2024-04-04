@@ -1,7 +1,9 @@
 package com.bigevent.service.impl;
 
 import com.bigevent.mapper.UserMapper;
+import com.bigevent.pojo.Result;
 import com.bigevent.pojo.User;
+import com.bigevent.pojo.dto.Password;
 import com.bigevent.service.UserService;
 import com.bigevent.utils.ThreadLocalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,18 +78,43 @@ public class UserServiceImpl implements UserService {
         return userMapper.getByUser(map);
     }
 
+    /**
+     * 更新用户基本信息
+     * @param user
+     */
     @Override
     public void update(User user) {
         user.setUpdateTime(LocalDateTime.now());
         userMapper.update(user);
     }
 
+    /**
+     * 更新用户头像
+     * @param avatarUrl
+     */
     @Override
     public void updateAvarter(String avatarUrl) {
+        User user=getUser();
+        userMapper.updateAvarter(avatarUrl,user.getId());
+    }
+    /**
+     * 更新用户密码
+     * @param password
+     */
+    @Override
+    public void updatePwd(String password) {
+        User user=getUser();
+        String passwordMd5 = DigestUtils.md5DigestAsHex(password.getBytes());
+        userMapper.updatePwd(passwordMd5,user.getId());
+    }
+    /**
+     * 公共获取用户信息方法
+     * @return
+     */
+    private User getUser(){
         Map map=new HashMap<>();
         map.put("username", ThreadLocalUtils.getCurrentUserName());
         User user=userMapper.getByUser(map);
-
-        userMapper.updateAvarter(avatarUrl,user.getId());
+        return user;
     }
 }

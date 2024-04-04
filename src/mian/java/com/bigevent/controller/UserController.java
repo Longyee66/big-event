@@ -3,6 +3,7 @@ package com.bigevent.controller;
 import com.bigevent.pojo.JwtProperties;
 import com.bigevent.pojo.Result;
 import com.bigevent.pojo.User;
+import com.bigevent.pojo.dto.Password;
 import com.bigevent.service.UserService;
 import com.bigevent.utils.JwtUtil;
 import com.bigevent.utils.ThreadLocalUtils;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,5 +81,21 @@ public class UserController {
         userService.updateAvarter(avatarUrl);
         return Result.success();
     }
-
+    @PatchMapping("updatePwd")
+    @ApiOperation("更新用户密码")
+    public Result updatePwd(@RequestBody Password password){
+        if (password.getOid_pwd().isEmpty()||password.getNew_pwd().isEmpty()||password.getRe_pwd().isEmpty()){
+            return Result.error("密码不能为空！！！");
+        }
+        log.info("password:{}",password);
+        User user=userService.getUserInfo(ThreadLocalUtils.getCurrentUserName());
+        if (!DigestUtils.md5DigestAsHex(password.getOid_pwd().getBytes()).equals(user.getPassword())){
+            return Result.error("原密码输入有误！！！");
+        }
+        if (!password.getNew_pwd().equals(password.getRe_pwd())){
+            return Result.error("新密码不一致！！！");
+        }
+        userService.updatePwd(password.getNew_pwd());
+        return Result.success();
+    }
 }
