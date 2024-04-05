@@ -1,12 +1,13 @@
 package com.bigevent.pojo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-
 @Data
-public class CategoryDTO {
+public class CategoryIdDTO {
+    private Integer id;
     @ApiModelProperty("分类名称")
     @NotEmpty
     private String categoryName;//分类名称

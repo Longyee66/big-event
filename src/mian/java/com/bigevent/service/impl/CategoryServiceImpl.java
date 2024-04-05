@@ -5,6 +5,7 @@ import com.bigevent.mapper.UserMapper;
 import com.bigevent.pojo.Category;
 import com.bigevent.pojo.User;
 import com.bigevent.pojo.dto.CategoryDTO;
+import com.bigevent.pojo.dto.CategoryIdDTO;
 import com.bigevent.service.CategoryService;
 import com.bigevent.utils.ThreadLocalUtils;
 import org.springframework.beans.BeanUtils;
@@ -37,6 +38,14 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCreateTime(LocalDateTime.now());
         category.setUpdateTime(LocalDateTime.now());
         categoryMapper.insert(category);
+    }
+
+    @Override
+    public void update(CategoryIdDTO categoryIdDTO) {
+        Category category =new Category();
+        BeanUtils.copyProperties(categoryIdDTO,category);
+        category.setUpdateTime(LocalDateTime.now());
+        categoryMapper.update(category);
     }
 
     /**
