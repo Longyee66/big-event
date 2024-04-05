@@ -1,6 +1,7 @@
 package com.bigevent.service;
 
 import com.bigevent.pojo.Category;
+import com.bigevent.pojo.dto.CategoryDTO;
 
 import java.util.List;
 
@@ -10,4 +11,10 @@ public interface CategoryService {
      * @return
      */
     List<Category> categoryList();
+
+    /**
+     * 新增文章分类
+     * @param categoryDTO
+     */
+    void addCategory(CategoryDTO categoryDTO);
 }

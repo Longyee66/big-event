@@ -1,9 +1,9 @@
 package com.bigevent.mapper;
 
 import com.bigevent.pojo.Category;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -14,4 +14,11 @@ public interface CategoryMapper {
      * @return
      */
     List<Category> getCategoryList(Integer userId);
+    /**
+     * 新增分类
+     * @param category
+     */
+    @Insert("insert into category(category_name, category_alias, create_user, create_time, update_time)" +
+            " VALUES (#{categoryName},#{categoryAlias},#{createUser},#{createTime},#{updateTime})")
+    void insert(Category category);
 }
