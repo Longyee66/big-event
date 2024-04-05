@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bigevent.mapper.CategoryMapper">
+
+    <select id="getCategoryList" resultType="com.bigevent.pojo.Category" parameterType="list">
+        select * from category
+        <where>
+            <if test="userId!=null">
+                create_user=#{userId}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("admin/user")
 @Api(tags = "用户相关接口")
 @Validated
 @Slf4j

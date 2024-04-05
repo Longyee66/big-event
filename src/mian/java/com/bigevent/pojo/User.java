@@ -27,7 +27,7 @@ public class User {
     @JsonIgnore//隐藏当前返回值
     private String password;//密码
     @NotEmpty
-    @Pattern(regexp = "^\\${1,10}$")
+    @Pattern(regexp = "^\\S{1,10}$")
     private String nickname;//昵称
 
     @NotEmpty
@@ -35,9 +35,9 @@ public class User {
     private String email;//邮箱
 
     private String userPic;//用户头像地址
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;//创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;//更新时间
 
 }
