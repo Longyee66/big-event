@@ -24,4 +24,10 @@ public interface ArticleService {
      * @return
      */
     Article findById(Integer id);
+
+    /**
+     * 删除文章
+     * @param id
+     */
+    void delete(Integer id);
 }

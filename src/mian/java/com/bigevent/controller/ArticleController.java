@@ -41,4 +41,10 @@ public class ArticleController {
         Article article=articleService.findById(id);
         return Result.success(article);
     }
+    @DeleteMapping
+    @ApiOperation("删除文章")
+    public Result delete(Integer id){
+        articleService.delete(id);
+        return Result.success();
+    }
 }

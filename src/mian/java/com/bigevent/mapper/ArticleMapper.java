@@ -2,10 +2,7 @@ package com.bigevent.mapper;
 
 import com.bigevent.pojo.Article;
 import com.bigevent.pojo.dto.ArticleIdDTO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface ArticleMapper {
@@ -23,4 +20,7 @@ public interface ArticleMapper {
 
     @Select("select * from article where id=#{id}")
     Article getById(Integer id);
+
+    @Delete("delete from article where id=#{id}")
+    void delete(Integer id);
 }

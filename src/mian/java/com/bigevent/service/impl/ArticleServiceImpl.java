@@ -42,6 +42,11 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.getById(id);
     }
 
+    @Override
+    public void delete(Integer id) {
+        articleMapper.delete(id);
+    }
+
     /**
      * 公共获取用户信息方法
      * @return
