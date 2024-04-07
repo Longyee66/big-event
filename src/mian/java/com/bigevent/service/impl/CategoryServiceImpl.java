@@ -48,6 +48,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.update(category);
     }
 
+    @Override
+    public Category getByIDcategory(Integer id) {
+        return categoryMapper.getByCategoryId(id);
+    }
+
     /**
      * 公共获取用户信息方法
      * @return

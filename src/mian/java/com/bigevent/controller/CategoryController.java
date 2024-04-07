@@ -7,11 +7,13 @@ import com.bigevent.pojo.dto.CategoryIdDTO;
 import com.bigevent.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -38,5 +40,11 @@ public class CategoryController {
     public Result updateCategory(@RequestBody @Validated CategoryIdDTO categoryIdDTO){
         categoryService.update(categoryIdDTO);
         return Result.success();
+    }
+    @GetMapping("/detail")
+    @ApiOperation("获取文章分类详情")
+    public Result getById(@NotNull Integer id){
+        Category category=categoryService.getByIDcategory(id);
+        return Result.success(category);
     }
 }

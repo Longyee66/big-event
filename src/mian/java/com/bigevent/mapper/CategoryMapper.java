@@ -3,6 +3,7 @@ package com.bigevent.mapper;
 import com.bigevent.pojo.Category;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 
@@ -29,4 +30,12 @@ public interface CategoryMapper {
      */
     @Update("update category set category_name=#{categoryName},category_alias=#{categoryAlias},update_time=#{updateTime}  where id =#{id}")
     void update(Category category);
+
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
+    @Select("select id,category_name,category_alias,create_time,update_time from category where id=#{id}")
+    Category getByCategoryId(Integer id);
 }

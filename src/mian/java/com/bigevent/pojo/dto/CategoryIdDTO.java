@@ -5,8 +5,11 @@ import io.swagger.models.auth.In;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Data
 public class CategoryIdDTO {
+    @NotNull
     private Integer id;
     @ApiModelProperty("分类名称")
     @NotEmpty

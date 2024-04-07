@@ -24,4 +24,11 @@ public interface CategoryService {
      * @param categoryIdDTO
      */
     void update(CategoryIdDTO categoryIdDTO);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    Category getByIDcategory(Integer id);
 }
