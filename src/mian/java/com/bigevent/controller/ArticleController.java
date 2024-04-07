@@ -1,12 +1,15 @@
 package com.bigevent.controller;
 
+import com.bigevent.pojo.Article;
 import com.bigevent.pojo.Result;
 import com.bigevent.pojo.dto.ArticleDTO;
 import com.bigevent.pojo.dto.ArticleIdDTO;
 import com.bigevent.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +35,10 @@ public class ArticleController {
         articleService.update(articleIdDTO);
         return Result.success();
     }
-
+    @GetMapping
+    @ApiOperation("获取文章详情")
+    public Result findById(Integer id){
+        Article article=articleService.findById(id);
+        return Result.success(article);
+    }
 }

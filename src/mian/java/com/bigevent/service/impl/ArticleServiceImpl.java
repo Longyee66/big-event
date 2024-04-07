@@ -37,6 +37,11 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.update(articleIdDTO);
     }
 
+    @Override
+    public Article findById(Integer id) {
+        return articleMapper.getById(id);
+    }
+
     /**
      * 公共获取用户信息方法
      * @return

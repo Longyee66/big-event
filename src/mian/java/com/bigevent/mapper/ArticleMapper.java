@@ -4,6 +4,7 @@ import com.bigevent.pojo.Article;
 import com.bigevent.pojo.dto.ArticleIdDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
@@ -19,4 +20,7 @@ public interface ArticleMapper {
     @Update("update article set title=#{title},content=#{content},cover_img=#{coverImg}," +
             "state=#{state},category_id=#{categoryId} ,update_time=now() where id=#{id}")
     void update(ArticleIdDTO articleIdDTO);
+
+    @Select("select * from article where id=#{id}")
+    Article getById(Integer id);
 }
