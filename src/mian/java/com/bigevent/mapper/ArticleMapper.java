@@ -2,7 +2,11 @@ package com.bigevent.mapper;
 
 import com.bigevent.pojo.Article;
 import com.bigevent.pojo.dto.ArticleIdDTO;
+import com.bigevent.pojo.dto.ArticlePageQueryDTO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
+
+import java.util.Map;
 
 @Mapper
 public interface ArticleMapper {
@@ -23,4 +27,6 @@ public interface ArticleMapper {
 
     @Delete("delete from article where id=#{id}")
     void delete(Integer id);
+
+    Page<Article> pageQuery(ArticlePageQueryDTO articlePageQueryDTO);
 }

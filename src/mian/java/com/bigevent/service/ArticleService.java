@@ -1,8 +1,12 @@
 package com.bigevent.service;
 
 import com.bigevent.pojo.Article;
+import com.bigevent.pojo.PageBean;
 import com.bigevent.pojo.dto.ArticleDTO;
 import com.bigevent.pojo.dto.ArticleIdDTO;
+import com.bigevent.pojo.dto.ArticlePageQueryDTO;
+
+import java.util.Map;
 
 public interface ArticleService {
     /**
@@ -30,4 +34,11 @@ public interface ArticleService {
      * @param id
      */
     void delete(Integer id);
+
+    /**
+     * 分页查询
+     * @param pageMap
+     * @return
+     */
+    PageBean pageQuery(ArticlePageQueryDTO articlePageQueryDTO);
 }

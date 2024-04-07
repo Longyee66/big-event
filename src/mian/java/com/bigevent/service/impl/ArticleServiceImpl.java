@@ -3,11 +3,15 @@ package com.bigevent.service.impl;
 import com.bigevent.mapper.ArticleMapper;
 import com.bigevent.mapper.UserMapper;
 import com.bigevent.pojo.Article;
+import com.bigevent.pojo.PageBean;
 import com.bigevent.pojo.User;
 import com.bigevent.pojo.dto.ArticleDTO;
 import com.bigevent.pojo.dto.ArticleIdDTO;
+import com.bigevent.pojo.dto.ArticlePageQueryDTO;
 import com.bigevent.service.ArticleService;
 import com.bigevent.utils.ThreadLocalUtils;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +49,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void delete(Integer id) {
         articleMapper.delete(id);
+    }
+
+    @Override
+    public PageBean pageQuery(ArticlePageQueryDTO articlePageQueryDTO) {
+        PageHelper.startPage(articlePageQueryDTO.getPageNum(),articlePageQueryDTO.getPageSize());
+        //将查询结果进行封装
+        Page<Article> page=articleMapper.pageQuery( articlePageQueryDTO);
+        return new PageBean(page.getTotal(),page.getResult());
     }
 
     /**
