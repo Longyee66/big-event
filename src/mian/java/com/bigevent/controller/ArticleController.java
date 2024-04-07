@@ -2,16 +2,14 @@ package com.bigevent.controller;
 
 import com.bigevent.pojo.Result;
 import com.bigevent.pojo.dto.ArticleDTO;
+import com.bigevent.pojo.dto.ArticleIdDTO;
 import com.bigevent.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -28,4 +26,11 @@ public class ArticleController {
         articleService.addArticle(articleDTO);
         return Result.success();
     }
+    @PutMapping
+    @ApiOperation("更新文章")
+    public Result updateArticle(@RequestBody ArticleIdDTO articleIdDTO){
+        articleService.update(articleIdDTO);
+        return Result.success();
+    }
+
 }

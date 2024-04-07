@@ -1,6 +1,7 @@
 package com.bigevent.service;
 
 import com.bigevent.pojo.dto.ArticleDTO;
+import com.bigevent.pojo.dto.ArticleIdDTO;
 
 public interface ArticleService {
     /**
@@ -8,4 +9,10 @@ public interface ArticleService {
      * @param articleDTO
      */
     void addArticle(ArticleDTO articleDTO);
+
+    /**
+     * 更新文章
+     * @param articleIdDTO
+     */
+    void update(ArticleIdDTO articleIdDTO);
 }

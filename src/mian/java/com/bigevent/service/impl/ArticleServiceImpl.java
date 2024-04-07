@@ -5,6 +5,7 @@ import com.bigevent.mapper.UserMapper;
 import com.bigevent.pojo.Article;
 import com.bigevent.pojo.User;
 import com.bigevent.pojo.dto.ArticleDTO;
+import com.bigevent.pojo.dto.ArticleIdDTO;
 import com.bigevent.service.ArticleService;
 import com.bigevent.utils.ThreadLocalUtils;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,11 @@ public class ArticleServiceImpl implements ArticleService {
         article.setCreateTime(LocalDateTime.now());
         article.setUpdateTime(LocalDateTime.now());
         articleMapper.insert(article);
+    }
+
+    @Override
+    public void update(ArticleIdDTO articleIdDTO) {
+        articleMapper.update(articleIdDTO);
     }
 
     /**
