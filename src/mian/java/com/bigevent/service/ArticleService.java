@@ -37,8 +37,7 @@ public interface ArticleService {
 
     /**
      * 分页查询
-     * @param pageMap
      * @return
      */
-    PageBean pageQuery(ArticlePageQueryDTO articlePageQueryDTO);
+    PageBean<Article> pageQuery(ArticlePageQueryDTO articlePageQueryDTO);
 }

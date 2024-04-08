@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -52,11 +53,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public PageBean pageQuery(ArticlePageQueryDTO articlePageQueryDTO) {
+    public PageBean<Article> pageQuery(ArticlePageQueryDTO articlePageQueryDTO) {
         PageHelper.startPage(articlePageQueryDTO.getPageNum(),articlePageQueryDTO.getPageSize());
         //将查询结果进行封装
-        Page<Article> page=articleMapper.pageQuery( articlePageQueryDTO);
-        return new PageBean(page.getTotal(),page.getResult());
+        articlePageQueryDTO.setUserId(getUserID());
+        Page<Article> page = articleMapper.pageQuery(articlePageQueryDTO);
+        return new PageBean<>(page.getTotal(),page.getResult());
     }
 
     /**

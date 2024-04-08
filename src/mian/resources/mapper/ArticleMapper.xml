@@ -8,11 +8,12 @@
         from article
         <where>
             <if test="categoryId!=null">
-                and category_id=#{categoryId}
+                and category_id=#{categoryId},
             </if>
             <if test="state!=null">
-                and state=#{state}
+                and state=#{state},
             </if>
+                and create_user=#{userId}
         </where>
     </select>
 </mapper>

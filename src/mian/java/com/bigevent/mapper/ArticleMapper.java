@@ -6,12 +6,14 @@ import com.bigevent.pojo.dto.ArticlePageQueryDTO;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
 public interface ArticleMapper {
     /**
      * 新增文章
+     *
      * @param article
      */
     @Insert("insert into article(title, content, cover_img,state, category_id, create_user, create_time, update_time) VALUES " +

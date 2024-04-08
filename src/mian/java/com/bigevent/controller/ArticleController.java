@@ -56,8 +56,8 @@ public class ArticleController {
 
     @GetMapping
     @ApiOperation("文章列表(条件分页)")
-    public Result<PageBean> pageResult(ArticlePageQueryDTO articlePageQueryDTO) {
-        PageBean pageBean = articleService.pageQuery(articlePageQueryDTO);
+    public Result<PageBean<Article>> pageResult(ArticlePageQueryDTO articlePageQueryDTO) {
+        PageBean<Article> pageBean = articleService.pageQuery(articlePageQueryDTO);
         return Result.success(pageBean);
     }
 }
