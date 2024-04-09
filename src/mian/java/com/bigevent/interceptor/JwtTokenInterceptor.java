@@ -37,7 +37,7 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
         String redisToken=stringRedisTemplate.opsForValue().get("token");
         try {
             log.info("jwt校验：{}",token);
-            if (redisToken==null||token.equals(redisToken)){
+            if (redisToken==null||!token.equals(redisToken)){
                 throw new RuntimeException();
             }
             Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);

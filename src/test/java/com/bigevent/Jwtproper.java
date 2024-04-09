@@ -1,11 +1,6 @@
 package com.bigevent;
 
-import com.bigevent.pojo.JwtProperties;
-import com.bigevent.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class Jwtproper {
 
