@@ -32,9 +32,20 @@ bigevent:
     admin-ttl: 86400000
     # 设置前端传递过来的令牌名称
     admin-token-name: Authorization
+  #阿里OSS配置
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tEnArYswmDPcSLZ95Tt
+    access-key-secret: ExLIQJYJ7oQThLQuoG2p1lzHMW7WsI
+    bucketName: big-event-long01
+
+
 #pagehelper分页插件配置
 page helper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+
+
