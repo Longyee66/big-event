@@ -6,6 +6,7 @@ import com.bigevent.utils.JwtUtil;
 import com.bigevent.utils.ThreadLocalUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class JwtTokenInterceptor implements HandlerInterceptor {
     @Autowired
     private JwtProperties jwtProperties;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
 //    拦截登录
     @Override
@@ -30,9 +33,13 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
         }
         //1、从请求头中获取token
         String token = request.getHeader(jwtProperties.getAdminTokenName());
-
+        //2.从redis中获取token
+        String redisToken=stringRedisTemplate.opsForValue().get("token");
         try {
             log.info("jwt校验：{}",token);
+            if (redisToken==null||token.equals(redisToken)){
+                throw new RuntimeException();
+            }
             Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             String username = (String) claims.get("username");
             ThreadLocalUtils.setCurrentUserName(username);

@@ -7,7 +7,14 @@ spring:
     url: jdbc:mysql://localhost:3306/big_event
     username: root
     password: root
-
+  redis:
+    host: localhost
+    database: 2
+    port: 6379
+  data:
+    redis:
+      repositories:
+        enabled: true
 #开启日志输出样式
 logging:
   level:

@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Pattern;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("admin/user")
@@ -30,6 +32,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private JwtProperties jwtProperties;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @PostMapping("/register")
     @ApiOperation("用户注册接口")
@@ -55,6 +59,7 @@ public class UserController {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", user.getUsername());
         String token = JwtUtil.createJWT(jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl(), claims);
+        stringRedisTemplate.opsForValue().set("token",token,1, TimeUnit.DAYS);//将token存入redis中
         return Result.success(token);
     }
 
@@ -96,6 +101,7 @@ public class UserController {
             return Result.error("新密码不一致！！！");
         }
         userService.updatePwd(password.getNew_pwd());
+        stringRedisTemplate.delete("token");
         return Result.success();
     }
 }
