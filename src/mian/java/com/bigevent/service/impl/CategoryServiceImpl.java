@@ -53,6 +53,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.getByCategoryId(id);
     }
 
+
+    @Override
+    public void deleteId(Integer id) {
+        categoryMapper.delete(id);
+    }
+
     /**
      * 公共获取用户信息方法
      * @return

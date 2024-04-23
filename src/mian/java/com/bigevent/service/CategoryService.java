@@ -31,4 +31,10 @@ public interface CategoryService {
      * @return
      */
     Category getByIDcategory(Integer id);
+
+    /**
+     * 删除文章分类
+     * @param id
+     */
+    void deleteId(Integer id);
 }

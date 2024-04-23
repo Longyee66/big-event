@@ -1,10 +1,7 @@
 package com.bigevent.mapper;
 
 import com.bigevent.pojo.Category;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 
 import java.util.List;
@@ -38,4 +35,11 @@ public interface CategoryMapper {
      */
     @Select("select id,category_name,category_alias,create_time,update_time from category where id=#{id}")
     Category getByCategoryId(Integer id);
+
+    /**
+     * 删除文章分类
+     * @param id
+     */
+    @Delete("delete from category where id=#{id}")
+    void delete(Integer id);
 }
