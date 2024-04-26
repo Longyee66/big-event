@@ -1,9 +1,8 @@
 package com.bigevent.service.impl;
 
 import com.bigevent.mapper.UserMapper;
-import com.bigevent.pojo.Result;
 import com.bigevent.pojo.User;
-import com.bigevent.pojo.dto.Password;
+import com.bigevent.pojo.dto.UserDTO;
 import com.bigevent.service.UserService;
 import com.bigevent.utils.ThreadLocalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,8 +82,7 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
-    public void update(User user) {
-        user.setUpdateTime(LocalDateTime.now());
+    public void update(UserDTO user) {
         userMapper.update(user);
     }
 

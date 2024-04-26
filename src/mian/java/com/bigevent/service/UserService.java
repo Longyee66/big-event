@@ -1,8 +1,7 @@
 package com.bigevent.service;
 
-import com.bigevent.pojo.Result;
 import com.bigevent.pojo.User;
-import com.bigevent.pojo.dto.Password;
+import com.bigevent.pojo.dto.UserDTO;
 
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public interface UserService {
     /**
      * 跟新用户信息
      */
-    void update(User user);
+    void update(UserDTO user);
 
     /**
      *

@@ -58,6 +58,7 @@ public class ArticleServiceImpl implements ArticleService {
         //将查询结果进行封装
         articlePageQueryDTO.setUserId(getUserID());
         Page<Article> page = articleMapper.pageQuery(articlePageQueryDTO);
+        System.out.println(page.getTotal());
         return new PageBean<>(page.getTotal(),page.getResult());
     }
 

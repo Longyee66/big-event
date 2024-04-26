@@ -4,6 +4,7 @@ import com.bigevent.pojo.JwtProperties;
 import com.bigevent.pojo.Result;
 import com.bigevent.pojo.User;
 import com.bigevent.pojo.dto.Password;
+import com.bigevent.pojo.dto.UserDTO;
 import com.bigevent.service.UserService;
 import com.bigevent.utils.JwtUtil;
 import com.bigevent.utils.ThreadLocalUtils;
@@ -76,8 +77,8 @@ public class UserController {
     }
     @PutMapping("/update")
     @ApiOperation("更新用户基本信息")
-    public Result update(@RequestBody @Validated User user){
-        userService.update(user);
+    public Result update(@RequestBody @Validated UserDTO userDTO){
+        userService.update(userDTO);
         return Result.success();
     }
     @PatchMapping("/updateAvatar")
